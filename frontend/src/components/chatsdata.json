@@ -1,0 +1,50 @@
+{
+    "days": [
+      {
+        "dayNumber": 1,
+        "chats": [
+          {
+            "id": 1,
+            "question": "What is your name?",
+            "answer": "My name is ChatGPT."
+          },
+          {
+            "id": 2,
+            "question": "How can I help you?",
+            "answer": "I can assist you with a wide range of topics."
+          }
+        ]
+      },
+      {
+        "dayNumber": 2,
+        "chats": [
+          {
+            "id": 1,
+            "question": "What is the capital of France?",
+            "answer": "The capital of France is Paris."
+          },
+          {
+            "id": 2,
+            "question": "What are the benefits of exercise?",
+            "answer": "Exercise has numerous health benefits, including improved physical and mental well-being."
+          }
+        ]
+      },
+      {
+        "dayNumber": 3,
+        "chats": [
+          {
+            "id": 1,
+            "question": "How do I bake a chocolate cake?",
+            "answer": "To bake a chocolate cake, you'll need ingredients like flour, sugar, cocoa powder, etc."
+          },
+          {
+            "id": 2,
+            "question": "What's the weather forecast for tomorrow?",
+            "answer": "The weather forecast predicts sunny weather with a chance of showers in the afternoon."
+          }
+        ]
+      }
+    ]
+  }
+  

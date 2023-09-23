@@ -1,0 +1,130 @@
+/* index.css or App.css */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Martel+Sans:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Martel+Sans&display=swap");
+
+/* Add the following CSS for the digital font and AI-looking style */
+h1 {
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+body {
+  margin: 0;
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif; */
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* src/tailwind.css */
+/* src/tailwind.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Dark theme */
+body {
+  background-color: #1a202c;
+  color: #e2e8f0;
+}
+
+.chat-container {
+  background-color: #2d3748;
+}
+
+.chat-header {
+  background-color: #1a202c;
+  padding-top: 22%;
+}
+
+.chat-messages {
+  background-color: #2d3748;
+  color: #e2e8f0;
+}
+
+.message {
+  border-color: #4a5568;
+}
+
+.message.bot {
+  background-color: #4a5568;
+}
+
+.message.user {
+  background-color: #2a4365;
+}
+
+/* Stick the input message area to the bottom */
+.chat-input {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+}
+
+/* Style for the chat input field */
+.chat-input input {
+  background-color: #4a5568;
+  color: #e2e8f0;
+  border-color: #4a5568;
+}
+
+/* Style for the chat input field when focused */
+.chat-input input:focus {
+  border-color: #7289da;
+  box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.2);
+}
+
+
+
+/* Style for the chat input button when focused */
+.chat-input button:focus {
+  box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.2);
+}
+
+/* Style for the scrollbar in the chat messages */
+.chat-messages::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: #2d3748;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: #4a5568;
+  border-radius: 4px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+  background: #3c4757;
+}
+
+
+.d-hidden{
+  display:none;
+}
+
+.sidebar-messages::-webkit-scrollbar {
+  width: 8px;
+}
+.sidebar-messages::-webkit-scrollbar-track{
+  background: #2d3748;
+}
+.sidebar-messages::-webkit-scrollbar-thumb{
+  background: #373d45;
+  border-radius: 4px;
+}
+.sidebar-messages::-webkit-scrollbar-thum:hover{
+  background: #3c4757;
+}

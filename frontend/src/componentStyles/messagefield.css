@@ -1,0 +1,47 @@
+/* AudioPlayer.css */
+.audio-container {
+  width: 100%;
+  max-width: 300px;
+  margin: 0;
+  display: block;
+   /* background-color: #2d3748;Discord-like dark background */
+  border-radius: 5px;
+  padding: 10px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+}
+
+/* Styling the audio element */
+.audio-container audio {
+  width: 100%;
+  display: block;
+  /* background-color: #2d3748; Discord-like background for audio element */
+  border-radius: 4px;
+}
+
+/* Styling the audio controls */
+.audio-container audio::-webkit-media-controls-panel {
+  background-color: #7289da; /* Discord-like dark background for controls panel */
+  border-radius: 6px;
+  border-color: #4a5568;
+}
+
+.audio-container audio::-webkit-media-controls-play-button,
+.audio-container audio::-webkit-media-controls-rewind-button,
+.audio-container audio::-webkit-media-controls-seek-back-button,
+.audio-container audio::-webkit-media-controls-seek-forward-button,
+.audio-container audio::-webkit-media-controls-volume-slider-container,
+.audio-container audio::-webkit-media-controls-volume-slider,
+.audio-container audio::-webkit-media-controls-mute-button {
+  background-color: #7289da; /* Discord-like blue color for control buttons */
+  border-radius: 4px;
+}
+
+/* Styling the audio progress bar */
+.audio-container audio::-webkit-media-controls-current-time-display,
+.audio-container audio::-webkit-media-controls-time-remaining-display,
+.audio-container audio::-webkit-media-controls-timeline {
+  color: #fff; /* White text color for progress bar and time display */
+}
+
+/* Additional styles as needed */
+

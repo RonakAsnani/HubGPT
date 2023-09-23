@@ -1,0 +1,6 @@
+frontend/node_modules
+**.mp4
+*.mp4
+backend/__pycache__
+*.wav
+*.db
