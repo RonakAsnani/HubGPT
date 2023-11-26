@@ -357,7 +357,7 @@ async def post_audio(file = File()):
     #     ]
     # )
     # chatgptanswer=responseFromChatGPT["choices"][0]['message']["content"]
-    chatgptanswer="OpenAI currently unavailable due to unavailibility of keys"
+    chatgptanswer="OpenAI currently unavailable, response cannot be generated"
 
     endpoint="https://api.elevenlabs.io/v1/text-to-speech/21m00Tcm4TlvDq8ikWAM"
     body={
@@ -394,7 +394,8 @@ async def audtotext(file = File()):
     fileOpener=open(file.filename,"rb")  
 
     AudioToText=openai.Audio.transcribe("whisper-1",fileOpener)
-    message=AudioToText["text"]
+    # message=AudioToText["text"]
+    message="Audo could not be converted due to openAI unavailibilty"
     # responseFromChatGPT=openai.ChatCompletion.create(
     # model="gpt-3.5-turbo",
     # messages=[
