@@ -11,21 +11,21 @@ const Signup = (props) => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const signup = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     axios
-      .post("http://127.0.0.1:8000/signup", {
+      .post("https://hubgpt.onrender.com/signup", {
         username: username,
         mobile: mobile,
         email: email,
         password: password,
       })
       .then(function (response) {
-        alert("User registered successfully!")
+        alert("User registered successfully!");
         navigate("/login");
         console.log(response.config.data);
       })
       .catch(function (error) {
-        alert(error.response.data.detail)
+        alert(error.response.data.detail);
         // console.log(error.response.data.detail);
       });
   };

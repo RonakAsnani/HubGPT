@@ -4,8 +4,17 @@ import axios from "axios";
 import "../componentStyles/messagefield.css";
 import AudioPlayer from "./audioPlayer";
 // import {useHistory} from 'react-router-dom'
-import {useLocation} from 'react-router-dom';
-const MessageField = ({ chatpos, chatid,setchatid , setsavechat, savechat, chatList, newchat, setnewchat}) => {
+import { useLocation } from "react-router-dom";
+const MessageField = ({
+  chatpos,
+  chatid,
+  setchatid,
+  setsavechat,
+  savechat,
+  chatList,
+  newchat,
+  setnewchat,
+}) => {
   // const history = useHistory();
   const location = useLocation();
   const [messages, setMessages] = useState([]);
@@ -39,34 +48,33 @@ const MessageField = ({ chatpos, chatid,setchatid , setsavechat, savechat, chatL
 
       var textval = "hello";
       const textRes = await axios
-        .post("http://127.0.0.1:8000/convert-audio-to-text/", form, {
+        .post("https://hubgpt.onrender.com/convert-audio-to-text/", form, {
           headers: {
-            'Content-Type': 'multipart/form-data'
+            "Content-Type": "multipart/form-data",
           },
         })
         .then((response) => {
-          textval = response.data
+          textval = response.data;
         });
       const message = textval;
-      setMessages([
-        ...messages,
-        { text: message, sender: "user" }
-      ]);
+      setMessages([...messages, { text: message, sender: "user" }]);
       if (message) {
         //   setMessages([...messages]);
         try {
           // GET OPENAI RESPONSE
-          const response = await axios.get(`http://127.0.0.1:8000/${message}`);
-    
+          const response = await axios.get(
+            `https://hubgpt.onrender.com/${message}`
+          );
+
           // TEXT RESPONSE
           const botMessage = response.data.response;
           // AUDIO RESPONSE
-        //  console.log(botMessage,"openai");
+          //  console.log(botMessage,"openai");
           setIsLoading(false);
           var audioOutput;
           const audioResponse = await axios
             .post(
-              "http://127.0.0.1:8000/convert-text-to-audio",
+              "https://hubgpt.onrender.com/convert-text-to-audio",
               { text: botMessage },
               {
                 headers: { "Content-Type": "audio/mpeg" },
@@ -82,13 +90,21 @@ const MessageField = ({ chatpos, chatid,setchatid , setsavechat, savechat, chatL
             ...messages,
             {
               message: (
-                <AudioPlayer message={textval} audioUrl={mediaBlobUrl} user={true}/>
+                <AudioPlayer
+                  message={textval}
+                  audioUrl={mediaBlobUrl}
+                  user={true}
+                />
               ),
               sender_type: "user",
             },
             {
               message: (
-                <AudioPlayer message={botMessage} audioUrl={audioOutput} user={false}/>
+                <AudioPlayer
+                  message={botMessage}
+                  audioUrl={audioOutput}
+                  user={false}
+                />
               ),
               sender_type: "bot",
             },
@@ -123,22 +139,21 @@ const MessageField = ({ chatpos, chatid,setchatid , setsavechat, savechat, chatL
     const message = document.getElementById("text-input-gpt").value.trim();
     if (message) {
       //   setMessages([...messages]);
-        setMessages([
-          ...messages,
-          { text: message, sender: "user" }
-        ]);
+      setMessages([...messages, { text: message, sender: "user" }]);
       try {
         // GET OPENAI RESPONSE
-        const response = await axios.get(`http://127.0.0.1:8000/${message}`);
-       // console.log(response);
+        const response = await axios.get(
+          `https://hubgpt.onrender.com/${message}`
+        );
+        // console.log(response);
         // TEXT RESPONSE
         const botMessage = response.data.response;
         // AUDIO RESPONSE
-        //console.log(botMessage);   
+        //console.log(botMessage);
         var audioOutput;
         const audioResponse = await axios
           .post(
-            "http://127.0.0.1:8000/convert-text-to-audio",
+            "https://hubgpt.onrender.com/convert-text-to-audio",
             { text: botMessage },
             {
               headers: { "Content-Type": "audio/mpeg" },
@@ -149,15 +164,19 @@ const MessageField = ({ chatpos, chatid,setchatid , setsavechat, savechat, chatL
             audioOutput = ConvertBlobToUrl(response.data);
           })
           .catch((error) => console.log(error));
-       // console.log(audioOutput);
-       setIsLoading(false);
+        // console.log(audioOutput);
+        setIsLoading(false);
 
         setMessages([
           ...messages,
           { message: message, sender_type: "user" },
           {
             message: (
-              <AudioPlayer message={botMessage} audioUrl={audioOutput} user={false}/>
+              <AudioPlayer
+                message={botMessage}
+                audioUrl={audioOutput}
+                user={false}
+              />
             ),
             sender_type: "bot",
           },
@@ -186,37 +205,42 @@ const MessageField = ({ chatpos, chatid,setchatid , setsavechat, savechat, chatL
   const sendApiRequest = async () => {
     try {
       // Replace with your actual API endpoint and request configuration
-      if(chatid == null){
-        const authToken = localStorage.getItem("DPAHub")
-     // console.log(dbmessages,authToken);
-      const response = await axios.post("http://127.0.0.1:8000/add_chats",dbmessages,{
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-          'Content-Type': 'application/json', // Set the content type to JSON
-        },
-      })
-     // console.log(response)
-      //setchatid(response.data.conversation_id)
-      //return response.data.conversation_id;
-      }else{
-        const authToken = localStorage.getItem("DPAHub")
+      if (chatid == null) {
+        const authToken = localStorage.getItem("DPAHub");
+        // console.log(dbmessages,authToken);
+        const response = await axios.post(
+          "https://hubgpt.onrender.com/add_chats",
+          dbmessages,
+          {
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+              "Content-Type": "application/json", // Set the content type to JSON
+            },
+          }
+        );
+        // console.log(response)
+        //setchatid(response.data.conversation_id)
+        //return response.data.conversation_id;
+      } else {
+        const authToken = localStorage.getItem("DPAHub");
         //console.log(dbmessages,authToken);
-        
-        const url = `http://127.0.0.1:8000/update_chats/${chatid}`;
-        const response = await axios.put(url,dbmessages,{
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-            'Content-Type': 'application/json', // Set the content type to JSON
-          },
-        }).then(()=>{
-         // console.log(chatid)
-        })
-       // console.log(response)
+
+        const url = `https://hubgpt.onrender.com/update_chats/${chatid}`;
+        const response = await axios
+          .put(url, dbmessages, {
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+              "Content-Type": "application/json", // Set the content type to JSON
+            },
+          })
+          .then(() => {
+            // console.log(chatid)
+          });
+        // console.log(response)
         //setchatid(null)
       }
-      
     } catch (error) {
-      console.error('Error sending API request:', error);
+      console.error("Error sending API request:", error);
     }
   };
   // useEffect(()=> {
@@ -230,49 +254,49 @@ const MessageField = ({ chatpos, chatid,setchatid , setsavechat, savechat, chatL
   //     console.log(dbmessages)
   //     sendApiRequest();
   //   }
-    
+
   // },[dbmessages])
 
-  useEffect(()=> {
-    if(savechat == true){
-      setsavechat(false)
+  useEffect(() => {
+    if (savechat == true) {
+      setsavechat(false);
       sendApiRequest();
       setMessages([]);
       setdbmessages([]);
     }
-  },[savechat])
-  const getchatlist = async () =>{
-    if(chatid !== null){
-      const authToken = localStorage.getItem("DPAHub")
-    const res = await axios.get(`http://127.0.0.1:8000/conversations/${chatid}`,{
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-        'Content-Type': 'application/json', // Set the content type to JSON
-      },
-    }).then((response)=>{
-      //console.log(response)
-      setMessages(response.data.chats)
-      setdbmessages(response.data.chats)
-    })
-    }else{
+  }, [savechat]);
+  const getchatlist = async () => {
+    if (chatid !== null) {
+      const authToken = localStorage.getItem("DPAHub");
+      const res = await axios
+        .get(`https://hubgpt.onrender.com/conversations/${chatid}`, {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+            "Content-Type": "application/json", // Set the content type to JSON
+          },
+        })
+        .then((response) => {
+          //console.log(response)
+          setMessages(response.data.chats);
+          setdbmessages(response.data.chats);
+        });
+    } else {
       setMessages([]);
       setdbmessages([]);
     }
-    
-  }
-  useEffect(()=>{
-   // setMessages(chatList[chatid])
-   //console.log(chatid)
-   getchatlist();
-   
-  },[chatid])
+  };
+  useEffect(() => {
+    // setMessages(chatList[chatid])
+    //console.log(chatid)
+    getchatlist();
+  }, [chatid]);
 
-  useEffect(()=>{
+  useEffect(() => {
     setnewchat(false);
-    setMessages([])
-    setdbmessages([])
-    setchatid(null)
-  },[newchat])
+    setMessages([]);
+    setdbmessages([]);
+    setchatid(null);
+  }, [newchat]);
 
   return (
     <div
@@ -326,7 +350,8 @@ const MessageField = ({ chatpos, chatid,setchatid , setsavechat, savechat, chatL
                     <i className="fa-regular fa-thumbs-up ml-2"></i>
                     <i className="fa-regular fa-thumbs-down ml-2"></i>
                   </div>
-                ) : (<></>
+                ) : (
+                  <></>
                   // <div className="float-right" style={{position:"relative",bottom:"22px",right:"3px"}}>
                   // <i className="far fa-play-circle"></i>
                   // </div>
@@ -352,15 +377,16 @@ const MessageField = ({ chatpos, chatid,setchatid , setsavechat, savechat, chatL
           onClick={sendMessage}
           className="px-4 py-2 text-white rounded-md bg-[#7289da]  focus:outline-none "
         >
-          {isLoading ? <i class="fa fa-spinner fa-spin"></i> : 'Send'}
+          {isLoading ? <i class="fa fa-spinner fa-spin"></i> : "Send"}
         </button>
 
-        {isLoading ?  <button className="px-4 py-2 text-white rounded-md bg-[#7289da]  focus:outline-none ">
-                        <i class="fa fa-spinner fa-spin"></i>
-                      </button>
-                      :
-                      <RecordIcon paramStop={handleStop} />
-        }      
+        {isLoading ? (
+          <button className="px-4 py-2 text-white rounded-md bg-[#7289da]  focus:outline-none ">
+            <i class="fa fa-spinner fa-spin"></i>
+          </button>
+        ) : (
+          <RecordIcon paramStop={handleStop} />
+        )}
         {console.log("HELL")}
       </div>
     </div>
